@@ -15,6 +15,7 @@ class ReusableForm(Form):
 
 
 @app.route("/", methods=['GET', 'POST'])
+
 def hello():
     form = ReusableForm(request.form)
     print(form.errors)
@@ -29,12 +30,13 @@ def hello():
             print(resp.reason)
             return
 
+        print(bikesPoints[0]['emptyDocks'])
         emptyDock = bikesPoints[0]['emptyDocks']
         location = bikesPoints[0]['name']
 
     if form.validate():
         # Save the comment here.
-        flash('Currently there are' + str(emptyDock) + " available bikes in " + location)
+        flash('Currently theis is' + str(emptyDock) + " available bikes in " + location)
     else:
         flash('Error: no id entered. ')
 

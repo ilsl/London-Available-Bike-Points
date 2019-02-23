@@ -1,0 +1,19 @@
+<title>Bike Point information</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container">
+<h2>Login</h2>
+
+{% block body %}
+{% if session['logged_in'] %}
+ 
+You're logged in already!
+ 
+{% else %}
+<form action="/login" method="POST">
+  <input type="username" name="username" placeholder="Username">
+<input type="password" name="password" placeholder="Password">
+<input type="submit" value="Log in">
+</form>{% endif %}
+{% endblock %}
+</div>
