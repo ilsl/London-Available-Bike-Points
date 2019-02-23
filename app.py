@@ -3,8 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 import os
 import requests
-
-
+import credentials
 
 # App config.
 DEBUG = True
@@ -13,13 +12,7 @@ app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
 
-# @app.route('/')
-# def home():
-#     if not session.get('logged_in'):
-#         return render_template('login.html')
-#
-#     else:
-#         return render_template('login.html')
+
 
 bike_occupancy_url_template = 'https://api.tfl.gov.uk/Occupancy/BikePoints/{BikePoints_id}'
 
@@ -29,7 +22,7 @@ class ReusableForm(Form):
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
-    if request.form['password'] == 'password' and request.form['username'] == 'admin':
+    if request.form['password'] == credentials['password'] and request.form['username'] == credentials['password']:
         session['logged_in'] = True
 
     else:
