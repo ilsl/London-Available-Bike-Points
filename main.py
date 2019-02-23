@@ -29,13 +29,12 @@ def hello():
             print(resp.reason)
             return
 
-        print(bikesPoints[0]['emptyDocks'])
         emptyDock = bikesPoints[0]['emptyDocks']
         location = bikesPoints[0]['name']
 
     if form.validate():
         # Save the comment here.
-        flash('Currently theis is' + str(emptyDock) + " available bikes in " + location)
+        flash('Currently there are' + str(emptyDock) + " available bikes in " + location)
     else:
         flash('Error: no id entered. ')
 
