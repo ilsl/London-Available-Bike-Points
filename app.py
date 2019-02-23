@@ -11,17 +11,19 @@ app = Flask(__name__, static_url_path='/static')
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 
-
-
-
+# Entry point for TFL API
 bike_occupancy_url_template = 'https://api.tfl.gov.uk/Occupancy/BikePoints/{BikePoints_id}'
 
+
+# Using Flask WTF forms to provide functionality between client end code and server send code
 class ReusableForm(Form):
     name = TextField('Name:', validators=[validators.required()])
 
 
+# This is the logging in page
 @app.route('/login', methods=['POST'])
 def do_admin_login():
+    #Check whether username and password is valid
     if request.form['password'] == credentials['password'] and request.form['username'] == credentials['password']:
         session['logged_in'] = True
 
@@ -30,17 +32,23 @@ def do_admin_login():
 
     return redirect(url_for('bike'))
 
+# This is the page which returns the Bike Point information
 @app.route("/", methods=['GET', 'POST'])
 def bike():
+    # Redirect to the login page when first loading the app
     if not session.get('logged_in'):
         return render_template('login.html')
 
     else:
+        # Once succeded in loggin in to the app then the bike_point_map.html can be rendered
         form = ReusableForm(request.form)
         print(form.errors)
+        # When the button is clicked perform the following
         if request.method == 'POST':
+            #Get Bike Point id from user
             userinput = request.form['name']
             try:
+                # Make a request to the TFL API
                 resp = requests.get('https://api.tfl.gov.uk/Occupancy/BikePoints/{}'.format(userinput))
                 bikesPoints = resp.json()
             except Exception as inst:
@@ -48,6 +56,7 @@ def bike():
                 print(resp.reason)
                 return
 
+            # Get the number of abailable bikes
             emptyDock = bikesPoints[0]['emptyDocks']
             location = bikesPoints[0]['name']
 
