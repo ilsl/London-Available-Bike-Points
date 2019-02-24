@@ -11,11 +11,10 @@ docker build -t tfl_bikes .
 
 Then to run the image as a container:
 
-docker run tfl_bikes
+docker run tfl_bikes -p 5005:5005
 
 
 requirements.txt: These are the libraries this project needs in order to run. The Dockerfile loads this modules into the container
-
 
 credentials.py: is where the credentials are called from
 
@@ -28,3 +27,5 @@ static/bike_points.html is a 30mb file which shows all the bike points on a lond
 static/London* are the geojson locations used to generate the map in bike_points.html
 
 app.py is the main server end file which serves up the logic for the entire app
+
+.gitignore: to include my service account key

@@ -1,11 +1,10 @@
-from flask import Flask
 from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 import os
 import requests
 import get_credentials
-import json
 from ast import literal_eval
+import credentials
 
 
 # App config.
@@ -26,14 +25,9 @@ class ReusableForm(Form):
 # This is the logging in page
 @app.route('/login', methods=['POST'])
 def do_admin_login():
-    # Get credentials from GCP bucket
-    # credentials.get()
     cred = get_credentials.read_file('credentials.py')
-    cred = literal_eval(cred.decode())
-    print(type(cred))
-    print(cred)
-    #Check whether username and password is valid
-    if request.form['password'] == cred['password'] and request.form['username'] == cred['username']:
+    #Check whether username and password user provides is equal to the hashed password
+    if get_credentials.check_password(cred['password'], request.form['password']) and request.form['username'] == cred['username']:
 
         session['logged_in'] = True
 
@@ -52,7 +46,6 @@ def bike():
     else:
         # Once succeded in loggin in to the app then the bike_point_map.html can be rendered
         form = ReusableForm(request.form)
-        print(form.errors)
         # When the button is clicked perform the following
         if request.method == 'POST':
             #Get Bike Point id from user
@@ -80,4 +73,5 @@ def bike():
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
+
 app.run(debug=True, host='0.0.0.0', port=5005)
