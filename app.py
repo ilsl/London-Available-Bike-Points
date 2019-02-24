@@ -24,7 +24,9 @@ class ReusableForm(Form):
 @app.route('/login', methods=['POST'])
 def do_admin_login():
     #Check whether username and password is valid
-    if request.form['password'] == credentials['password'] and request.form['username'] == credentials['password']:
+    # if request.form['password'] == credentials.credentials['password'] and request.form['username'] == credentials.credentials['password']:
+    if request.form['password'] == credentials.credentials['password'] and request.form['username'] == credentials.credentials['username']:
+
         session['logged_in'] = True
 
     else:
@@ -70,4 +72,4 @@ def bike():
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
-app.run(debug=True, host='0.0.0.0', port=5000)
+app.run(debug=True, host='0.0.0.0', port=5005)
