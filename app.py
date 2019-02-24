@@ -1,10 +1,8 @@
-from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
-from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
+from flask import Flask, flash, redirect, render_template, request, session, url_for
+from wtforms import Form, TextField, validators
 import os
 import requests
 import get_credentials
-from ast import literal_eval
-import credentials
 
 
 # App config.

@@ -16,7 +16,10 @@ docker run tfl_bikes -p 5005:5005
 
 requirements.txt: These are the libraries this project needs in order to run. The Dockerfile loads this modules into the container
 
-credentials.py: is where the credentials are called from
+credentials.py: file stored on GCP bucket
+
+get_credentials.py: functios to read data from gcp bucket, hash and unhash password. This was the following command used to has the password:
+get_credentials.hash_password('password')
 
 templates/bike_point_map.html: is the front end main page of the app
 
