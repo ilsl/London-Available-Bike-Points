@@ -10,7 +10,7 @@ This simple website connects to TFL API and pulls the currently available inform
 6. Stored docker image on Google Container Registry
 7. Scripts which provision the website to be deployed on a kuberentes cluster on GCP
 
-File descriptions
+# File descriptions
 
 Tfl Bikes.ipynb: notebook which produces the static/bike_points.html file which is later loaded into the main website
 
