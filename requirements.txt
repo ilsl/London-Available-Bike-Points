@@ -1,4 +1,6 @@
+python-appengine
 requests
 bokeh
 Flask
 Flask-WTF
+google-cloud-storage

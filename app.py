@@ -3,7 +3,10 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 import os
 import requests
-import credentials
+import get_credentials
+import json
+from ast import literal_eval
+
 
 # App config.
 DEBUG = True
@@ -23,9 +26,14 @@ class ReusableForm(Form):
 # This is the logging in page
 @app.route('/login', methods=['POST'])
 def do_admin_login():
+    # Get credentials from GCP bucket
+    # credentials.get()
+    cred = get_credentials.read_file('credentials.py')
+    cred = literal_eval(cred.decode())
+    print(type(cred))
+    print(cred)
     #Check whether username and password is valid
-    # if request.form['password'] == credentials.credentials['password'] and request.form['username'] == credentials.credentials['password']:
-    if request.form['password'] == credentials.credentials['password'] and request.form['username'] == credentials.credentials['username']:
+    if request.form['password'] == cred['password'] and request.form['username'] == cred['username']:
 
         session['logged_in'] = True
 
