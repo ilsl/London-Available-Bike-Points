@@ -16,12 +16,6 @@ Tfl Bikes.ipynb: notebook which produces the static/bike_points.html file which 
 
 Dockerfile: This is the file which produces the Docker image to be run using the following commands:
 
-docker build -t tfl_bikes .
-
-Then to run the image as a container locally:
-
-docker run tfl_bikes -p 5005:5005
-
 
 requirements.txt: These are the libraries this project needs in order to run. The Dockerfile loads this modules into the container
 
@@ -45,3 +39,13 @@ app.py is the main server end file which serves up the logic for the entire app
 create-kubernetes-cluster.sh: creates and provisions a kubernetes cluster
 
 delete-kubernetes-cluster.sh: deletes the kuberenets cluster
+
+# To Run locally
+
+docker build -t tfl_bikes . #This should be run in the root of the project, where the Dockerfile is
+
+docker run tfl_bikes -p 5005:5005
+
+# To run on Kubernetes cluster with load balancing
+
+bash scripts/create-kubernetes-cluster.sh # Then go the external website shown as output and add port 5005 e.g 12.34.56.7:5005
