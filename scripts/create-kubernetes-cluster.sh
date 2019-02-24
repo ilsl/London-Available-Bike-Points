@@ -8,6 +8,8 @@ kubectl run tfl-bikes --image=gcr.io/${PROJECT_ID}/tfl_bikes:v1 --port 5005
 kubectl expose deployment tfl-bikes --type=LoadBalancer --port 5005 --target-port 5005
 kubectl scale deployment tfl-bikes --replicas=2
 
+# Pause shell script for 1 minute, this will be enough time for an external ip to be assigned
+sleep 1m
 OUTPUT="$(kubectl get service)"
 # OUTPUT contains the external ip address of the website that we need to connect to
 echo "${OUTPUT}"
