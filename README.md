@@ -10,7 +10,7 @@ This simple website connects to TFL API and pulls the currently available inform
 6. Stored docker image on Google Container Registry
 7. Scripts which provision the website to be deployed on a kuberentes cluster on GCP
 
-# File descriptions
+### File descriptions
 
 Tfl Bikes.ipynb: notebook which produces the static/bike_points.html file which is later loaded into the main website
 
@@ -40,12 +40,15 @@ create-kubernetes-cluster.sh: creates and provisions a kubernetes cluster
 
 delete-kubernetes-cluster.sh: deletes the kuberenets cluster
 
-# To Run locally
-
+### To Run locally
+```
 docker build -t tfl_bikes . #This should be run in the root of the project, where the Dockerfile is
 
 docker run tfl_bikes -p 5005:5005
+```
 
-# To run on Kubernetes cluster with load balancing
-
-bash scripts/create-kubernetes-cluster.sh # Then go the external website shown as output and add port 5005 e.g 12.34.56.7:5005
+### To run on Kubernetes cluster with load balancing
+```
+bash scripts/create-kubernetes-cluster.sh
+```
+Then go the external website shown as output and add port 5005 e.g 12.34.56.7:5005
