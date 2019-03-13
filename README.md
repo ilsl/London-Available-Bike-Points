@@ -9,6 +9,8 @@ This simple website connects to TFL API and pulls the currently available inform
 5. Able to access the TFL api and retrieve available bike info
 6. Stored docker image on Google Container Registry
 7. Scripts which provision the website to be deployed on a kuberentes cluster on GCP
+7. Load Balancer on Kubernetes cluster
+8. Using casandra database to store data
 
 ### File descriptions
 
